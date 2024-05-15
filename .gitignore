@@ -1,0 +1,8 @@
+*.pth
+*.jpg
+*.png
+*.xml
+*.pyc
+*.log
+*.tar
+*.zip
