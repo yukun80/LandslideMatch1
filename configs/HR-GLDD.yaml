@@ -1,0 +1,27 @@
+# arguments for dataset
+dataset: HR-GLDD
+nclass: 2
+crop_size: 128
+data_root: 'dataset\\HR-GLDD'
+
+# arguments for training
+epochs: 100
+batch_size: 2 # per GPU x 4 GPUs
+lr: 0.00025
+lr_multi: 10.0
+criterion:
+  name: CELoss
+  kwargs:
+    ignore_index: 255
+conf_thresh: 0.95
+
+# arguments for model
+model: deeplabv3plus
+backbone: resnet101
+# 指定是否在ResNet101的最后三个块（blocks）中使用空洞卷积来替换步幅为2的卷积。
+# ResNet101由多个残差块（residual blocks）组成，其中步幅为2的卷积层通常用于减少特征图的空间尺寸。
+# 这些布尔值决定了是否用空洞卷积来代替这些步幅为2的卷积，以保持特征图的空间尺寸不变，同时增加感受野。
+replace_stride_with_dilation: [False, False, True]
+# 指定每个块中空洞卷积的膨胀率（dilation rate）。
+# 空洞卷积通过在卷积核元素之间插入空洞（即零）来扩展感受野，而不增加计算量。
+dilations: [6, 12, 18]
